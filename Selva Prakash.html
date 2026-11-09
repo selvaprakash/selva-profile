@@ -1,0 +1,260 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Selva Prakash</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column; each project is a case file with a pipeline strip, decisions, impact and stack */
+:root{
+  --bg:#f4f6f5; --surface:#ffffff; --ink:#14201d; --muted:#56635f; --line:#d8dfdc;
+  --accent:#17705b; --accent-soft:#e2efea;
+  --display:"Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1514; --surface:#161e1c; --ink:#e6ecea; --muted:#9aa8a3; --line:#2a3532;
+  --accent:#4fc3a1; --accent-soft:#1b2f29; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1514; --surface:#161e1c; --ink:#e6ecea; --muted:#9aa8a3; --line:#2a3532;
+  --accent:#4fc3a1; --accent-soft:#1b2f29; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding-block:56px 72px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-0.01em}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* hero */
+.hero{display:flex;flex-direction:column;gap:18px}
+.hero h1{font-size:clamp(40px,7vw,64px);line-height:1.02;font-weight:700}
+.hero .role{font-family:var(--display);font-size:clamp(20px,3vw,26px);font-weight:500;color:var(--accent)}
+.hero .lede{max-width:62ch;color:var(--ink)}
+.avail{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+  font-family:var(--mono);font-size:13px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.avail::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* figures */
+.figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fig{padding:20px 16px 18px 0;display:flex;flex-direction:column;gap:4px}
+.fig + .fig{padding-left:16px;border-left:1px solid var(--line)}
+.fig b{font-family:var(--display);font-size:32px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.fig span{font-size:14px;color:var(--muted);line-height:1.35}
+@media (max-width:640px){.figures{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fig:nth-child(3){padding-left:0;border-left:0}
+  .fig:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:24px}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+.sec-head h2{font-size:28px;font-weight:600}
+
+/* project */
+.project{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:18px}
+@media (max-width:520px){.project{padding:20px}}
+.p-top{display:flex;flex-direction:column;gap:6px}
+.p-top h3{font-size:24px;font-weight:700}
+.p-meta{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.p-meta a{color:var(--muted)}
+.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;padding:12px;background:var(--accent-soft);border-radius:6px;overflow-x:auto}
+.pipe span{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:4px 8px;white-space:nowrap}
+.pipe i{font-style:normal;color:var(--accent)}
+.decisions{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.decisions li{display:grid;grid-template-columns:minmax(0,1fr);gap:2px}
+.decisions strong{font-family:var(--display);font-weight:600;font-size:16px}
+.impact{display:flex;flex-direction:column;gap:4px;padding-top:16px;border-top:1px dashed var(--line)}
+.impact p{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.35}
+.stack{display:flex;flex-wrap:wrap;gap:6px}
+.stack span{font-family:var(--mono);font-size:12px;padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+/* approach */
+.principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 32px}
+@media (max-width:640px){.principles{grid-template-columns:minmax(0,1fr)}}
+.principles div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.principles h3{font-size:18px;font-weight:600}
+.principles p{color:var(--muted);font-size:16px}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:20px}
+.t-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px}
+@media (max-width:520px){.t-row{grid-template-columns:minmax(0,1fr);gap:4px}}
+.t-row .when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.t-row h3{font-size:18px;font-weight:600}
+.t-row p{color:var(--muted);font-size:16px}
+
+/* contact */
+.contact{display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:10px;background:var(--ink);color:var(--bg)}
+.contact h2{font-size:26px}
+.contact p{max-width:58ch;opacity:.85}
+.c-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.c-row code{font-family:var(--mono);font-size:15px;user-select:all}
+.c-row button{font-family:var(--mono);font-size:13px;padding:6px 12px;border-radius:6px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+.links{display:flex;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:14px}
+.links a{color:inherit}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="label">Srivilliputtur, Tamil Nadu · Works remotely</span>
+    <h1>Selva Prakash</h1>
+    <p class="role">AI Systems Architect · Founder, Tuple Ventures</p>
+    <p class="lede">I design and build production AI products end to end, from the model pipeline to the database to the last screen. After 18 years in enterprise IT, ending as Senior Manager of the Analytics Center of Excellence at Flex, I've spent the last three years shipping AI systems for law firms, a radiology practice and thousands of developers.</p>
+    <span class="avail">Open to AI architecture, technical leadership and founding-team roles</span>
+  </header>
+
+  <div class="figures" aria-label="Key figures">
+    <div class="fig"><b>18+</b><span>years in enterprise IT and analytics</span></div>
+    <div class="fig"><b>100+</b><span>patents filed with my drafting system</span></div>
+    <div class="fig"><b>2,100</b><span>radiology reports in Oct 2026</span></div>
+    <div class="fig"><b>600+</b><span>organic users on Revibe</span></div>
+  </div>
+
+  <section aria-labelledby="work">
+    <div class="sec-head">
+      <span class="label">Selected work</span>
+      <h2 id="work">Systems in production</h2>
+    </div>
+
+    <article class="project">
+      <div class="p-top">
+        <h3>Patent Drafting AI</h3>
+        <p class="p-meta">For IP Dome, Chennai · 2025–present · Architect &amp; builder</p>
+      </div>
+      <p>Turns a university's invention disclosure form into a filing-ready patent draft, following the firm's own two-stage workflow.</p>
+      <div class="pipe" aria-label="Pipeline">
+        <span>Invention disclosure</span><i>→</i><span>Prior-art search</span><i>→</i><span>Patentability report + score</span><i>→</i><span>University approval</span><i>→</i><span>Full specification + claims</span>
+      </div>
+      <ul class="decisions">
+        <li><strong>Small model, structured prompts</strong>Runs on Gemini 2.5 Flash. Section-specific prompts and structured inputs give a small, fast model the accuracy a legal document needs, at a fraction of a large model's cost.</li>
+        <li><strong>Swappable search layer</strong>Prior-art search moved from a USPTO service to search APIs to AI-based search over Google Patents, with no change to the drafting workflow.</li>
+        <li><strong>Built and licensed independently</strong>Designed and shipped in 3–4 months, licensed to IP Dome on a usage-based model, and now being prepared for other IP firms.</li>
+      </ul>
+      <div class="impact">
+        <span class="label">Impact</span>
+        <p>A search report that took a patent agent 3 days now takes under 30 minutes. 100+ patents filed.</p>
+      </div>
+      <div class="stack"><span>Gemini 2.5 Flash</span><span>Python · FastAPI</span><span>React</span><span>PostgreSQL</span></div>
+    </article>
+
+    <article class="project">
+      <div class="p-top">
+        <h3>AI Radiology Reporting</h3>
+        <p class="p-meta">For a radiologist in Australia · 2026–present · Architect &amp; lead developer</p>
+      </div>
+      <p>Radiologists dictate reports that usually go to offshore transcriptionists and come back 4–5 hours later. This app turns dictation into a finished draft in the practice's own templates.</p>
+      <div class="pipe" aria-label="Pipeline">
+        <span>Dictation</span><i>→</i><span>ElevenLabs Scribe v2</span><i>→</i><span>GPT-5.5 cleanup</span><i>→</i><span>Template match</span><i>→</i><span>Radiologist review</span>
+      </div>
+      <ul class="decisions">
+        <li><strong>Rescued and rebuilt</strong>Took over after a previous developer left before go-live. Rebuilt the product from scratch and reached the earlier feature set in 2 weeks, against a 2-month estimate.</li>
+        <li><strong>Template-driven formatting</strong>The LLM layer strips speech artefacts and fits each dictation to the practice's templates (shoulder X-ray, chest X-ray, ultrasound and more), drawing on reference reports when needed. Live transcription supports quick corrections.</li>
+        <li><strong>Privacy by deletion</strong>Zero-retention LLM processing, no patient identifiers in transcription, IP-restricted Cloudflare R2 storage, and all recordings and files deleted once a report is finalised. Migration to Australian hosting is underway with the practice's IT team.</li>
+      </ul>
+      <div class="impact">
+        <span class="label">Impact</span>
+        <p>Turnaround cut from 4–5 hours to under a minute. Live since September 2026, with about 2,100 reports in October.</p>
+      </div>
+      <div class="stack"><span>Next.js</span><span>ElevenLabs Scribe v2</span><span>GPT-5.5</span><span>PostgreSQL</span><span>Cloudflare R2</span><span>Render</span></div>
+    </article>
+
+    <article class="project">
+      <div class="p-top">
+        <h3>Revibe</h3>
+        <p class="p-meta"><a href="https://revibe.codes" target="_blank" rel="noopener">revibe.codes</a> · 2026–present · Founder &amp; architect</p>
+      </div>
+      <p>Teaches software architecture from real codebases. Point it at a repository and it produces architecture maps, execution flows, module breakdowns and guided code walkthroughs.</p>
+      <div class="pipe" aria-label="Pipeline">
+        <span>Repo or ZIP (≤200 MB)</span><i>→</i><span>Object storage</span><i>→</i><span>Long-context analysis</span><i>→</i><span>Mermaid diagrams + docs</span><i>→</i><span>App · MCP · Chrome</span>
+      </div>
+      <ul class="decisions">
+        <li><strong>Long-context model with a fallback</strong>Gemini Flash's large context window handles whole-repo analysis, with Claude Haiku as a backup where diagram generation needs it.</li>
+        <li><strong>Code pulled in on demand</strong>Repositories stay in object storage and are fetched to the server only when a user opens a walkthrough, which takes a couple of seconds and keeps compute lean.</li>
+        <li><strong>Built for AI workflows</strong>MCP servers for npm and Python, a Claude Code skill and a Chrome extension export architecture context straight to coding agents.</li>
+      </ul>
+      <div class="impact">
+        <span class="label">Impact</span>
+        <p>Demand tested on Twitter before building. 600+ users, all organic, with steady sign-ups from Reddit.</p>
+      </div>
+      <div class="stack"><span>Gemini Flash</span><span>Claude Haiku</span><span>Python · FastAPI</span><span>React</span><span>PostgreSQL</span><span>Cloudflare R2</span><span>MCP</span></div>
+    </article>
+
+    <article class="project">
+      <div class="p-top">
+        <h3>LyncLearn</h3>
+        <p class="p-meta"><a href="https://lynclearn.com" target="_blank" rel="noopener">lynclearn.com</a> · 2023–24 · Founder &amp; architect · Pre-incubated at Atal Incubation Centre, Anna University</p>
+      </div>
+      <p>Generates personalised upskilling courses built on what the learner already knows. A Python developer learning Java gets Java mapped onto familiar Python ideas; a Java developer heading into AI covers the Python they need first.</p>
+      <div class="pipe" aria-label="Pipeline">
+        <span>Skills + goals</span><i>→</i><span>Learning plan</span><i>→</i><span>Topic-by-topic content</span><i>→</i><span>Narration</span><i>→</i><span>Synced slide course</span>
+      </div>
+      <ul class="decisions">
+        <li><strong>Long-form output on small context windows</strong>Built on GPT-3.5 and GPT-4. Each topic was generated with the list of topics already covered, which removed repetition and made courses of up to 10 hours possible.</li>
+        <li><strong>Synchronised audio-visual delivery</strong>A custom pipeline aligned Google Text-to-Speech narration with Reveal.js slides, before AI video and image generation were practical.</li>
+        <li><strong>Accuracy by scope</strong>Content focused on concepts, where LLMs are reliable, rather than problem-specific code, where they hallucinate more.</li>
+      </ul>
+      <div class="impact">
+        <span class="label">Status</span>
+        <p>Now being folded into Revibe as its learning layer.</p>
+      </div>
+      <div class="stack"><span>GPT-3.5 · GPT-4</span><span>Google TTS</span><span>Reveal.js</span></div>
+    </article>
+  </section>
+
+  <section aria-labelledby="approach">
+    <div class="sec-head">
+      <span class="label">How I build</span>
+      <h2 id="approach">Architecture principles</h2>
+    </div>
+    <div class="principles">
+      <div><h3>Right-size the model</h3><p>A small model with structured inputs often beats a large one on cost and speed. I start small and add capability only where the output needs it.</p></div>
+      <div><h3>Keep providers swappable</h3><p>Search APIs and models change fast. Each external service sits behind its own layer so it can be replaced without touching the workflow.</p></div>
+      <div><h3>Fit the real workflow</h3><p>Every system follows how the experts already work, with review points where a human signs off, so adoption doesn't depend on retraining people.</p></div>
+      <div><h3>Delete what you don't need</h3><p>Sensitive data is stored only as long as the task requires, behind restricted access, and processed by providers that don't retain it.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="exp">
+    <div class="sec-head">
+      <span class="label">Career</span>
+      <h2 id="exp">Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-row"><span class="when">2023 – present</span><div><h3>Founder, Tuple Ventures</h3><p>Designing, building and licensing AI products for legal, healthcare and developer education.</p></div></div>
+      <div class="t-row"><span class="when">Jun 2016 – Jun 2023</span><div><h3>Flex · Senior Manager, Analytics Center of Excellence</h3><p>Led the enterprise analytics function at a global electronics manufacturer.</p></div></div>
+      <div class="t-row"><span class="when">Jan 2005 – Jun 2016</span><div><h3>TCS · Motorola Mobility relationship</h3><p>Data analytics and data engineering roles across Chennai, the US (5 years) and Singapore (1 year).</p><div class="stack" style="margin-top:8px"><span>Tableau</span><span>Alteryx</span><span>Snowflake</span><span>Informatica</span><span>Python</span><span>Oracle</span><span>SQL</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="contact" aria-labelledby="contact">
+    <h2 id="contact">Let's talk</h2>
+    <p>I'm open to AI architecture, technical leadership and founding-team roles. If you're building something where the model is only half the problem, I'd like to hear about it.</p>
+    <div class="c-row">
+      <code id="email">selva@tupleventures.com</code>
+      <button id="copy" type="button">Copy email</button>
+    </div>
+    <div class="links">
+      <a href="https://www.tupleventures.com" target="_blank" rel="noopener">tupleventures.com</a>
+      <a href="https://revibe.codes" target="_blank" rel="noopener">revibe.codes</a>
+      <a href="https://lynclearn.com" target="_blank" rel="noopener">lynclearn.com</a>
+    </div>
+  </section>
+
+  <footer>Selva Prakash · Tuple Ventures · Updated November 2026</footer>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click', function(){
+  var b=this, t=document.getElementById('email').textContent;
+  function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy email'},1600)}
+  function fallback(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
+  try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
+});
+</script>
+
+</body></html>
